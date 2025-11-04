@@ -2,27 +2,38 @@ import fs from "node:fs/promises";
 import { sendResponse } from "../utils/sendResponse.js";
 
 export async function handleGet(res) {
-  /*
-Challenge:
-1. Export a function called handleGet(). 
-2. It should:
-   - use getData() to get the data
-   - stringify that data
-   - use sendResponse() to serve it
-   
-Open the browser and load the sightings page to see if it works.
-*/
   const data = await fs.readFile("./data/data.json");
   const json = JSON.parse(data);
   const content = JSON.stringify(json);
-  console.log(content);
-  sendResponse(res, 200, "text/html", content);
+  sendResponse(res, 200, "application/json", content);
 }
 
-export function handlePost() {
-  console.log("post hanldes");
+export async function handlePost(req,res) {
+  console.log(req.body)
+  let body = ''
+  req.on('data',function(chunk){
+    return body+=chunk.toString() 
+  })
+
+  req.on('end',()=>{
+    try {
+      const parsed = JSON.parse(body)
+      console.log(parsed)
+    }catch(e){
+      console.log(e)
+    }
+  })
+  console.log("post hanlddsadsakdkdes");
 }
 
-// handleGet
 
-// handlePost
+
+// parseJSONBody() will collect and parse the incoming JSON
+// santizeData() 
+// addNewSighting() will do the donkey work of adding the data to our dataset
+// sendResponse()
+
+/*
+Challenge:
+  1. Create and export a function called handlePost().
+  2. For now, that function can just log 'POST request received'.*/
