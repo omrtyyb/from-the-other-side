@@ -9,5 +9,8 @@
     "start": "node server.js"
   },
   "author": "tayeb",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "sanitize-html": "^2.17.0"
+  }
 }

@@ -15,7 +15,7 @@ const server = http.createServer(async (req, res) => {
       if (req.method === "GET") {
         return await handleGet(res);
       } else if (req.method === "POST") {
-        return await handlePost(req, res, dir);
+        return await handlePost(req, res);
       }
     } catch (e) {
       console.log(e);

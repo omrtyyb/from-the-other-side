@@ -10,18 +10,16 @@ export async function handleGet(res) {
   sendResponse(res, 200, "application/json", content);
 }
 
-export async function handlePost(req, res, dir) {
+export async function handlePost(req, res) {
   try {
     const parsedData = await parseJSONBody(req);
-    console.log(parsedData);
-    await addNewSighting(parsedData, dir);
-    console.log(parsedData);
-    sendResponse(res, 200, "application/json", JSON.stringify(parsedData));
+    await addNewSighting(parsedData);
+    sendResponse(res, 201, "application/json", JSON.stringify(parsedData));
   } catch (err) {
     console.error("Error in handlePost:", err);
     sendResponse(
       res,
-      500,
+      400,
       "application/json",
       JSON.stringify({ error: err.message })
     );
